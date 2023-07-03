@@ -3,6 +3,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    render :new
   end
 
   def create
@@ -10,12 +11,12 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to posts_path
     else
-      render status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
   def index
-    @posts = Posts.all
+    @posts = Post.all
   end
 
   private

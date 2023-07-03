@@ -1,0 +1,26 @@
+<h1>Posts</h1>
+
+<% if user_signed_in? %>
+  <h3>Welcome, <%= current_user.email %>!</h3>
+  <%= link_to 'Create Post', new_post_path %>  
+<% else %>
+  <h3> Welcome, kind Stranger! </h3>
+  <p><%= link_to 'Sign in', new_user_session_path %></p>
+<% end %>
+<ul>
+  <% @posts.each do |post| %>
+    <li>
+      <h2> <%= post.title %> </h2>
+      <p> <%= post.content %> </p>
+      <% if user_signed_in?  %>
+        <p>Author: <%= post.user.email %> </p>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<% if user_signed_in?  %>
+  <%= link_to 'Log out', destroy_user_session_path %>
+<% else %>
+  <%= link_to 'Sign up!', new_user_registration_path %>
+<% end %>
